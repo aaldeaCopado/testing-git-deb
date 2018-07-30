@@ -27,9 +27,6 @@ function topic() {
 topic "Only for comptatibility, accepting but not considering ${CACHE_DIR} cause .deb packages are included. "
 
 mkdir -p "$TEMPORARY_DIR/$BUILDPACK_SUPPORT"
-mkdir -p /var/cache/apt/archives/partial
-
-
 
 
 APT_CACHE_DIR="$CACHE_DIR/apt/cache"
