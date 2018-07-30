@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# bin/release <build-dir>
+
+cat <<EOF
+---
+config_vars:
+  PATH: vendor/git/bin:vendor/git/libexec/git-core:bin:/usr/local/bin:/usr/bin:/bin
+EOF

@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+# bin/compile <build-dir> <cache-dir>
+
+# fail fast
+# NOTE: pipes ( | ) will make this useless, so do not use them.
+set -e
+
+# ************** VARs & Fns **************
+
+# parse and derive params
+BUILD_DIR=$1
+CACHE_DIR=$2
+LP_DIR=`cd $(dirname $0); cd ..; pwd`
+SUPPORT_DIR=`echo $(dirname $0); pwd`
+TEMPORARY_DIR=/tmp
+DEB_FILES=support
+DEB_LIBPCRE=libpcre2-8-0_10.21-1_amd64.deb
+DEB_GIT_MAN=git-man_2.18.0-0ppa1~ubuntu16.04.1_all.deb
+DEB_GIT_BIN=git_2.18.0-0ppa1~ubuntu16.04.1_amd64.deb
+
+function topic() {
+  echo "-----> $*"
+}
+
+# ************** MAIN **************
+
+topic "Only for comptatibility, accepting but not considering ${CACHE_DIR} cause .deb packages are included. "
+
+mkdir -p "$TEMPORARY_DIR/$BUILDPACK_SUPPORT"
+
+for DEB in $(ls -1 $BUILDPACK_SUPPORT/*.deb); do
+  topic "Installing $(basename $DEB)"
+  #dpkg -x $DEB $BUILD_DIR/.apt/
+  apt install -y $DEB
+done
+
+#topic "Writing profile script"
+#mkdir -p $BUILD_DIR/.profile.d
+#cat <<EOF > $BUILD_DIR/.profile.d/git.sh
+#export PATH="/app/.apt/usr/bin:$PATH"
+#export LD_LIBRARY_PATH="/app/.apt/usr/lib:/app/.apt/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH"
+#export LIBRARY_PATH="/app/.apt/usr/lib:/app/.apt/usr/lib/git-core:$LIBRARY_PATH"
+#export CPATH="$INCLUDE_PATH"
+#export CPPPATH="$INCLUDE_PATH"
+#export GIT_CONFIG_NOSYSTEM=1
+#export GIT_EXEC_PATH=/app/.apt/usr/lib/git-core/
+#EOF
+
+#. $BUILD_DIR/.profile.d/git.sh
+
+#cp $BUILD_DIR/.profile.d/git.sh "$LP_DIR/export"
+
+#echo "### listing... $LP_DIR/export"
+#cat "$LP_DIR/export"
+
