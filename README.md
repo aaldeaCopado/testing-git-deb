@@ -1,4 +1,2 @@
-Copado buildpack: Git
-============================
+Test customized git version
 
-which installs (.deb in support directory) a specific version of git.
