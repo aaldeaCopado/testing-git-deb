@@ -41,9 +41,7 @@ mkdir -p "$APT_STATE_DIR/lists/partial"
 
 APT_OPTIONS="-o debug::nolocking=true -o dir::cache=$APT_CACHE_DIR -o dir::state=$APT_STATE_DIR -o dir::etc::sourcelist=$APT_SOURCES_LIST"
 apt $APT_OPTIONS --allow-unauthenticated clean
-
-
-
+apt purge git git-man
 
 
 apt-get purge git
@@ -53,8 +51,9 @@ apt-get autoremove
 for DEB in $(ls -1 $DEB_FILES/*.deb); do
   topic "Installing $(basename $DEB)"
   #dpkg -x $DEB $BUILD_DIR/.apt/
-  apt install -y $DEB
+  #apt install $DEB  
 done
+apt install  /app/support/git_2.18.0-0ppa1~ubuntu16.04.1_amd64.deb
 
 #topic "Writing profile script"
 #mkdir -p $BUILD_DIR/.profile.d
