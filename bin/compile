@@ -27,6 +27,10 @@ function topic() {
 topic "Only for comptatibility, accepting but not considering ${CACHE_DIR} cause .deb packages are included. "
 
 mkdir -p "$TEMPORARY_DIR/$BUILDPACK_SUPPORT"
+mkdir -p /var/cache/apt/archives/partial
+apt-get purge git
+apt-get autoremove
+
 
 for DEB in $(ls -1 $DEB_FILES/*.deb); do
   topic "Installing $(basename $DEB)"
