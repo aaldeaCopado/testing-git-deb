@@ -1,2 +1,1 @@
 Test customized git version
-
