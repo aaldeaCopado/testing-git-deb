@@ -28,7 +28,7 @@ topic "Only for comptatibility, accepting but not considering ${CACHE_DIR} cause
 
 mkdir -p "$TEMPORARY_DIR/$BUILDPACK_SUPPORT"
 
-for DEB in $(ls -1 $BUILDPACK_SUPPORT/*.deb); do
+for DEB in $(ls -1 $DEB_FILES/*.deb); do
   topic "Installing $(basename $DEB)"
   #dpkg -x $DEB $BUILD_DIR/.apt/
   apt install -y $DEB
